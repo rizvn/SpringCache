@@ -19,34 +19,34 @@ public class CacheTest {
   SlowCalculator mSlowCalculator;
 
   @Before
-  public void setUp(){
+  public void setUp() {
     context = new AnnotationConfigApplicationContext(Config.class);
     mSlowCalculator = context.getBean(SlowCalculator.class);
   }
 
   @After
-  public void teardown(){
+  public void teardown() {
     //shut down the Spring context so ehcache shutdown gracefully
     ((ConfigurableApplicationContext) context).close();
   }
 
   @Test
-  public void testCacheCalculation(){
+  public void testCacheCalculation() {
     long start = new Date().getTime();
-    System.out.println("Result :" + mSlowCalculator.calculateHypotenuse(4,5));
+    System.out.println("Result :" + mSlowCalculator.calculateHypotenuse(4, 5));
 
     long elapsed = new Date().getTime() - start;
-    Assert.assertTrue("Calculation should take longer than 5000ms",elapsed > 5000);
+    Assert.assertTrue("Calculation should take longer than 5000ms", elapsed > 5000);
 
     start = new Date().getTime();
-    System.out.println("Result :" + mSlowCalculator.calculateHypotenuse(4,5));
+    System.out.println("Result :" + mSlowCalculator.calculateHypotenuse(4, 5));
     elapsed = new Date().getTime() - start;
     Assert.assertTrue("Calculation should take less tahn 5000ms as should be cached", elapsed < 5000);
 
     start = new Date().getTime();
-    System.out.println("Result :" + mSlowCalculator.calculateHypotenuse(4,5));
+    System.out.println("Result :" + mSlowCalculator.calculateHypotenuse(4, 5));
     elapsed = new Date().getTime() - start;
-    Assert.assertTrue("Calculation should take less than 5000ms",elapsed < 5000);
+    Assert.assertTrue("Calculation should take less than 5000ms", elapsed < 5000);
   }
 
 
