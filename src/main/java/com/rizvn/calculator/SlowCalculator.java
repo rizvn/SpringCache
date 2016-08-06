@@ -5,10 +5,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 @Component
-@CacheConfig(cacheNames = "calculator_cache")
+@CacheConfig(cacheNames = "calculator_cache") //<-- default cache where results will be cached
 public class SlowCalculator {
 
-  @Cacheable
+  @Cacheable //<-- indicates that the result will be cached so, second with same arguments will not wait 5000ms
   public Double calculateHypotenuse(int a, int b) {
     System.out.println("Calculating hypotenuse...");
     sleep(5000L);

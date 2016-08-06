@@ -18,6 +18,8 @@ public class Config {
   @Bean
   public CacheManager cacheManager() {
     EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+
+    //ehcache.xml is under src/main/resources/ehcache.xml
     ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
     ehCacheManagerFactoryBean.setShared(true);
 
